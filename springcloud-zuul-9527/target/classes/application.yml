@@ -1,0 +1,21 @@
+server:
+  port: 9527
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+  instance:
+    instance-id: zuul9527.com
+    prefer-ip-address: true #默认配置为false，不配置注册到eureka上的就是主机名，配置为true注册到eureka上的就是ip
+info:   #配置监控信息
+  app.name: wang-springcloud
+  company.name: blog.wangstudy.com
+zuul:
+  routes:
+    mydept.serviceId: springcloud-provider-dept
+    mydept.path: /mydept/**
+    ignored-services:  "*"  #*表示所有，除了/mydept/可以访问，其他都不能访问
+    #springcloud-provider-dept  不能再使用这个名称访问了
+  profix: /wang #统一前缀，域名中添加该前缀才能访问
+
